@@ -14,6 +14,8 @@ public class Hello {
     
     private String who = "World";
     
+    private String language = "en";
+    
     private String message = null;
     
     public String getWho() {
@@ -25,10 +27,11 @@ public class Hello {
     }
     
     public String getMessage(){
-        if (message == null){
-            message = getGreeting() + " " + getWho() + "!";
+        switch(language){
+            case "en": return message = getGreeting() + " " + getWho() + "!";
+            case "cn": return message = "你好，世界！";
         }
-        return message;
+        throw new IllegalStateException("inconceivable!");
     }
     
     public String getGreeting() {
@@ -49,6 +52,11 @@ public class Hello {
     }
 
     void setlanguage(String language) {
+        if(language.equals("en") || language.equals("cn")){
+            this.language = language;
+        }
+        else{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
     }
 }
