@@ -4,4 +4,4 @@ This solves the [Death Knight Hero](https://open.kattis.com/problems/deathknight
 
 ![kattis](kattis.png)
 
-![netbeans](netbeans.png
+![netbeans](netbeans.png)
