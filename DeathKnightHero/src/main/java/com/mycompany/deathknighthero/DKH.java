@@ -7,57 +7,53 @@ package com.mycompany.deathknighthero;
 
 import java.io.PrintStream;
 import java.util.Scanner;
-import java.util.regex.*;
+import java.util.*;
 
 /**
  *
  * @author god
  */
 public class DKH {
-    Scanner in;
-    PrintStream out;
+    Scanner in = new Scanner(System.in);
+    PrintStream out = System.out;
+    
+            
     int n, k, wins;
+    String line;
     
     public static void main(String[] args) throws Exception {
         DKH dkh = new DKH();
         dkh.run();
-        
     }
 
-    void run() {
-        in = new Scanner(System.in);
-        out = System.out;
-        
-        
-        while(true){
-            read();
-            if (finished()) break;
-            solve();
-            write();
-        }
+    void run() {    
+        read();
+        write();
     }
 
     void read() {
         wins = 0;
-        String battles = in.nextLine();
-        n = Integer.parseInt(battles);
-    }
-
-    boolean finished() {
-       return true;
-    }
-
-    void solve() {
-        for(int i = 0; i<n; i++){
-            String sequence = in.nextLine();
-            if(sequence.matches("\\w*DC\\w")){
-                wins = wins + 1;
-            }
+        n = Integer.parseInt(in.nextLine());
+        for(int i = 0; i < n; i++) {
+            line = in.nextLine();
+            solve(line);
         }
-        finished();
+    }
+
+    void solve(String line) {
+        if(line.contains("CD")){}
+            
+        else wins++;
+        
     }
                 
     void write() {
-        out.print(wins);
+        out.println(wins);
     }  
 }
+/*
+3
+DCOOO
+DODOCD
+COD
+*/

@@ -9,108 +9,76 @@ import java.util.Scanner;
 import org.junit.*;
 import static org.junit.Assert.*;
 
-
+import java.io.PrintStream;
+import java.io.ByteArrayOutputStream;
 /**
  *
  * @author god
  */
 public class DKHTest {
-    
-    public DKHTest() {
+
+    DKH ex1(){
+       DKH dkh = new DKH();
+       dkh.n = 1;
+       dkh.line = "OOODCOOCD";
+       dkh.wins=1;
+       return dkh;
     }
 
-    @BeforeClass
-    public static void setUpClass() throws Exception {
-    }
-
-    @AfterClass
-    public static void tearDownClass() throws Exception {
-    }
-
-    @Before
-    public void setUp() throws Exception {
-    }
-
-    @After
-    public void tearDown() throws Exception {
-    }
-    
-    /**
-     * Test of main method, of class DKH.
-     */
-    @Test
-    public void testMain() throws Exception {
-        System.out.println("main");
-        String[] args = null;
-        DKH.main(args);
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of read method, of class DKH.
-     */
-    @Test
-    public void testRead() {
-        System.out.println("read");
-        DKH instance = new DKH();
-        instance.read();
-        fail("test Prototype");
-    }
-
-    /**
-     * Test of finished method, of class DKH.
-     */
-    @Test
-    public void testFinished() {
-        System.out.println("finished");
-        DKH instance = new DKH();
-        boolean expResult = false;
-        boolean result = instance.finished();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of solve method, of class DKH.
-     */
-    @Test
-    public void testSolve() {
-        System.out.println("solve");
-        DKH instance = new DKH();
-        instance.solve();
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of write method, of class DKH.
-     */
-    @Test
-    public void testWrite() {
-        System.out.println("write");
-        DKH instance = new DKH();
-        instance.write();
-        fail("prototype");
-    }
-    
-    @Test
-    public void testsample1(){
-        DKH dkh = new DKH();
-        String EOL = System.lineSeparator();
-        Scanner in;
-        in = new Scanner("3" + EOL + "DCOOO" + EOL +"DODOCD"+ EOL + "COD" + EOL);
-        dkh.run();
-        fail("prototype");
-    }
-
-    /**
-     * Test of run method, of class DKH.
-     */
-    @Test
     public void testRun() {
-        System.out.println("run");
         DKH instance = new DKH();
+        String EOL = System.lineSeparator();
+        instance.in = new Scanner("3" + EOL
+                                    + "DCOOO" + EOL
+                                    + "DODOCD" + EOL
+                                    + "COD" + EOL);
+        var bos = new ByteArrayOutputStream();
+        instance.out = new PrintStream(bos);
         instance.run();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        instance.out.close();
+        String expect = "2" + EOL;
+        String result = bos.toString();
+        assertEquals(expect,result);
     }
     
+    void assertAppInEquals(DKH expect, DKH result) {
+        assertEquals(expect.wins, result.wins);
+        assertEquals(expect.line, result.line);
+        assertEquals(expect.n, result.n);
+    }
+
+    public void testRead() {
+        DKH expect = ex1();
+        DKH result = new DKH();
+        result.in = new Scanner("1" + System.lineSeparator());
+        result.read();
+        assertAppInEquals(expect, result);
+    }
+
+    public void testWrite() {
+        int expect = 4;
+        DKH instance = new DKH();
+        var bos = new ByteArrayOutputStream();
+        instance.out = new PrintStream(bos);
+        instance.wins = 4;
+        instance.write();
+        instance.out.close();
+        String result = bos.toString();
+        assertEquals(expect,result);
+    }
+    
+    public void testSolve(){
+        DKH instance = new DKH();
+        int expect = 0;
+        instance.wins = 0;
+        instance.line = "OOOCDOO";
+        instance.solve(instance.line);
+        int result = instance.wins;
+        assertEquals(expect,result);
+        instance.line = "OOOCDDDODCOO";
+        instance.solve(instance.line);
+        expect = 1;
+        result = instance.wins;
+        assertEquals(expect,result);
+    }
 }
