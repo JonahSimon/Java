@@ -21,10 +21,11 @@ public class DKHTest {
        DKH dkh = new DKH();
        dkh.n = 1;
        dkh.line = "OOODCOOCD";
-       dkh.wins=1;
+       dkh.wins=0;
        return dkh;
     }
-
+    
+    @Test
     public void testRun() {
         DKH instance = new DKH();
         String EOL = System.lineSeparator();
@@ -41,22 +42,26 @@ public class DKHTest {
         assertEquals(expect,result);
     }
     
-    void assertAppInEquals(DKH expect, DKH result) {
+    
+    public void assertAppInEquals(DKH expect, DKH result) {
         assertEquals(expect.wins, result.wins);
         assertEquals(expect.line, result.line);
         assertEquals(expect.n, result.n);
     }
-
+    
+    @Test
     public void testRead() {
         DKH expect = ex1();
         DKH result = new DKH();
-        result.in = new Scanner("1" + System.lineSeparator());
+        result.in = new Scanner("1" + System.lineSeparator()
+                                + "OOODCOOCD" + System.lineSeparator());
         result.read();
         assertAppInEquals(expect, result);
     }
-
+    
+    @Test
     public void testWrite() {
-        int expect = 4;
+        String expect = "4"+System.lineSeparator();
         DKH instance = new DKH();
         var bos = new ByteArrayOutputStream();
         instance.out = new PrintStream(bos);
@@ -67,6 +72,7 @@ public class DKHTest {
         assertEquals(expect,result);
     }
     
+    @Test
     public void testSolve(){
         DKH instance = new DKH();
         int expect = 0;
@@ -75,7 +81,7 @@ public class DKHTest {
         instance.solve(instance.line);
         int result = instance.wins;
         assertEquals(expect,result);
-        instance.line = "OOOCDDDODCOO";
+        instance.line = "OOODDODCOO";
         instance.solve(instance.line);
         expect = 1;
         result = instance.wins;
