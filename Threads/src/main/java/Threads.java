@@ -16,17 +16,20 @@ import java.util.stream.IntStream;
  */
 class ThreadJob{
     Threads problem;
-    Vector<Integer> numbers;
-    float average;
+    Vector<Integer> numbers = new Vector<>();
+    float average = 0;
     
     ThreadJob(Threads problem, Vector numbers){
-        this.numbers = new Vector<>();
+        this.problem = problem;
         this.numbers = numbers;
+    }
+
+    ThreadJob() {
     }
     
     public void run(){
         average = problem.findAverage(numbers);
-        System.out.println(average + System.lineSeparator());
+        System.out.println(average +" is the average of " + numbers + System.lineSeparator());
     }
     
 }
@@ -34,8 +37,7 @@ class ThreadJob{
 public class Threads{
     Scanner input = new Scanner(System.in);
     
-    Vector<Integer> getNumbers(){
-        Vector<Integer> numbers = new Vector();
+    Vector<Integer> getNumbers(Vector<Integer>numbers){
         String line = input.nextLine();
         String number;
         int num;
@@ -61,10 +63,18 @@ public class Threads{
     void parallelEval(int threads) {
         ArrayList<ThreadJob> jobs = new ArrayList<>(threads);
         for (int thread = 0; thread < threads; ++thread) {
-            Vector<Integer> list1 = getNumbers();
-            jobs.add(new ThreadJob(this, list1));
+            
+            Vector<Integer> list = new Vector<>();
+            list = getNumbers(list);
+            jobs.add(new ThreadJob(this, list));
         }
-        jobs.parallelStream().forEach(job->job.run());
+        jobs.parallelStream().forEach(ThreadJob->ThreadJob.run());  
+    }
+    
+    void parallelEval() {
+        int cores = Runtime.getRuntime().availableProcessors();
+        int threads = 2 * cores;
+        parallelEval(threads);
     }
     
 }

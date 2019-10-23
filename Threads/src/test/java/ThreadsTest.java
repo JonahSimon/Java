@@ -19,8 +19,6 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class ThreadsTest {
     
-    public ThreadsTest() {
-    }
 
     /**
      * Test of getNumbers method, of class Threads.
@@ -33,13 +31,24 @@ public class ThreadsTest {
         instance.input = new Scanner("1" + EOL +
                                      "2" + EOL +
                                      "3" + EOL +
+                                     " " + EOL +
+                                     "2" + EOL +
+                                     "2" + EOL +
                                      " " + EOL);
         Vector<Integer> expResult = new Vector();
         expResult.add(1);
         expResult.add(2);
         expResult.add(3);
-        Vector<Integer> result = instance.getNumbers();
+        Vector<Integer> result = new Vector<>();
+        result = instance.getNumbers(result);
         assertEquals(expResult, result);
+        expResult.clear();
+        expResult.add(2);
+        expResult.add(2);
+        result.clear();
+        result = instance.getNumbers(result);
+        assertEquals(expResult, result);
+        
     }
 
     /**
@@ -69,11 +78,27 @@ public class ThreadsTest {
     @Test
     public void testParallelEval() {
         System.out.println("parallelEval");
-        int threads = 0;
+        String EOL = System.lineSeparator();
+        int threads = 1;
         Threads instance = new Threads();
-        instance.parallelEval(threads);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        instance.input = new Scanner("1" + EOL +
+                                     "2" + EOL +
+                                     "3" + EOL +
+                                     "4" + EOL + 
+                                     " " + EOL+
+                                     "5" + EOL + 
+                                     "6" + EOL +
+                                     "7" + EOL +
+                                     " " + EOL +
+                                     "8" + EOL + 
+                                     "9" + EOL +
+                                     "10" + EOL +
+                                     " " + EOL +
+                                     "11" + EOL + 
+                                     "12" + EOL +
+                                     "13" + EOL +
+                                     " " + EOL);
+                        instance.parallelEval(4);
     }
     
 }
