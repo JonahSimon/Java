@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -49,6 +50,25 @@ public class app {
             System.out.println(e.getMessage());
         }
     }
+    
+    public void selectAll(){  
+        String sql = "SELECT * FROM warehouses";  
+          
+        try {  
+            Connection conn = this.connect();  
+            Statement stmt  = conn.createStatement();  
+            ResultSet rs    = stmt.executeQuery(sql);  
+              
+            // loop through the result set  
+            while (rs.next()) {  
+                System.out.println(rs.getInt("id") +  "\t" +   
+                                   rs.getString("name") + "\t" +  
+                                   rs.getDouble("capacity"));  
+            }  
+        } catch (SQLException e) {  
+            System.out.println(e.getMessage());  
+        }  
+    } 
 
     /**
      *

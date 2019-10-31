@@ -5,6 +5,10 @@
  */
 package com.github.jonahs.PlayingWithClasses.db;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import org.junit.*;
 import static org.junit.Assert.*;
 
@@ -16,49 +20,26 @@ public class appTest {
     
     public appTest() {
     }
-
-    @Test
-    public void testInsert() {
-        System.out.println("insert");
-        String name = "bob";
-        double capacity = 1;
-        app instance = new app();
-        instance.insert(name, capacity);
-        //instance.equals(name);
-    }
-
-    /**
-     * Test of createNewTable method, of class app.
-     */
-    @Test
-    public void testCreateNewTable() {
-        System.out.println("createNewTable");
-        app instance = new app();
-        instance.createNewTable();
-    }
-
-    /**
-     * Test of createNewDatabase method, of class app.
-     */
-    @Test
-    public void testCreateNewDatabase() {
-        System.out.println("createNewDatabase");
-        app instance = new app();
-        instance.createNewDatabase();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
+   
     /**
      * Test of run method, of class app.
      */
     @Test
     public void testRun() {
         System.out.println("run");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(baos); 
+        System.setOut(ps);  
+        String ExpResult = "The driver name is SQLite JDBC" + System.lineSeparator() +
+                           "A new database has been created." + System.lineSeparator() +
+                           "1\tRaw Materials\t3000.0"  + System.lineSeparator() +
+                           "2\tSemifinished Goods\t4000.0" + System.lineSeparator() +
+                           "3\tFinished Goods\t5000.0" + System.lineSeparator();
         app instance = new app();
         instance.run();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.flush();
+        instance.selectAll();
+        assertEquals(ExpResult,baos.toString());   
     }
     
 }
