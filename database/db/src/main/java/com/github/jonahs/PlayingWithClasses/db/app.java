@@ -92,11 +92,12 @@ public class app {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //new app().run();
+        new app().run();
     }
 
     void run() {
         createNewDatabase();
+        
         createNewTable();
         insert("Raw Materials", 3000);
         insert("Semifinished Goods", 4000);

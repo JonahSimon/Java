@@ -58,9 +58,11 @@ public class db extends defaultdb {
     void run() throws SQLException {
         reset();
         long AliceInChainsId = insertBand("Alice in Chains");
-        System.out.println("Alice Id=" + AliceInChainsId);
+        System.out.println("Alice Id = " + AliceInChainsId);
         long ACDCId = insertBand("ACDC");
-        System.out.println("ACDC name=" + getBand(AliceInChainsId));
+        System.out.println("Alice name = " + getBand(AliceInChainsId));
+        System.out.println("ACDC Id = " + ACDCId);
+        System.out.println("ACDC name = " + getBand(ACDCId));
     }
 
 }
