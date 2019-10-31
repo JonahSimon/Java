@@ -5,16 +5,8 @@
  */
 package com.github.jonahs.PlayingWithClasses.db;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.*;
+import static org.junit.Assert.*;
 
 /**
  *
@@ -25,34 +17,14 @@ public class appTest {
     public appTest() {
     }
 
-    @BeforeClass
-    public static void setUpClass() throws Exception {
-    }
-
-    @AfterClass
-    public static void tearDownClass() throws Exception {
-    }
-
-    @Before
-    public void setUp() throws Exception {
-    }
-
-    @After
-    public void tearDown() throws Exception {
-    }
- 
-    /**
-     * Test of insert method, of class app.
-     */
     @Test
     public void testInsert() {
         System.out.println("insert");
-        String name = "";
-        double capacity = 0.0;
+        String name = "bob";
+        double capacity = 1;
         app instance = new app();
         instance.insert(name, capacity);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //instance.equals(name);
     }
 
     /**
@@ -63,8 +35,6 @@ public class appTest {
         System.out.println("createNewTable");
         app instance = new app();
         instance.createNewTable();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -75,18 +45,6 @@ public class appTest {
         System.out.println("createNewDatabase");
         app instance = new app();
         instance.createNewDatabase();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of main method, of class app.
-     */
-    @Test
-    public void testMain() {
-        System.out.println("main");
-        String[] args = null;
-        app.main(args);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

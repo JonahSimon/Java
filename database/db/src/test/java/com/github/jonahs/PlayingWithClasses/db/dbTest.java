@@ -5,16 +5,9 @@
  */
 package com.github.jonahs.PlayingWithClasses.db;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.*;
+import static org.junit.Assert.*;
+
 
 /**
  *
@@ -29,18 +22,6 @@ public class dbTest {
     public static void setUpClass() throws Exception {
     }
 
-    @AfterClass
-    public static void tearDownClass() throws Exception {
-    }
-
-    @Before
-    public void setUp() throws Exception {
-    }
-
-    @After
-    public void tearDown() throws Exception {
-    }
-
     /**
      * Test of reset method, of class db.
      */
@@ -48,7 +29,6 @@ public class dbTest {
     public void testReset() throws Exception {
         System.out.println("reset");
         db instance = new db();
-        instance.run();
         instance.reset();
         instance.insertBand("Head Portals");
         String Result = "Head Portals";
@@ -59,18 +39,21 @@ public class dbTest {
 
     /**
      * Test of insertBand method, of class db.
+     * @throws java.lang.Exception
      */
     @Test
     public void testInsertBand() throws Exception {
         System.out.println("insertBand");
         String name = "Alice in Chains";
-        db instance = new db();
-        instance.reset();
-        instance.insertBand(name);
-        String expResult = name;
-        String result = instance.getBand(1);
-        assertEquals(expResult, result);
-        instance.close();
+        try (db instance = new db()) {
+            instance.getConnection();
+            instance.reset();
+            instance.insertBand(name);
+            String expResult = name;
+            String result = instance.getBand(1);
+            assertEquals(expResult, result);
+            instance.close();
+        }
     }
 
     /**
@@ -81,6 +64,7 @@ public class dbTest {
         System.out.println("getBand");
         long id = 1 ;
         db instance = new db();
+        instance.getConnection();
         instance.reset();
         instance.insertBand("Modest Mouse");
         String expResult = "Modest Mouse";
@@ -96,6 +80,7 @@ public class dbTest {
     public void testRun() throws Exception {
         System.out.println("run");
         db instance = new db();
+        instance.getConnection();
         instance.run();
         String ExpResult = instance.getBand(1);
         String ExpResult2 = instance.getBand(2);
