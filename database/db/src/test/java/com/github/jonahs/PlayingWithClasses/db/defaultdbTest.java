@@ -12,6 +12,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.*;
 import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotEquals;
+
 
 /**
  *
@@ -39,57 +41,36 @@ public class defaultdbTest {
     }
     
     /**
-     * Test of getURL method, of class defaultdb.
+     * Test of getURL method and setURL method, of class defaultdb.
      */
     @Test
-    public void testGetURL() {
-        System.out.println("getURL");
+    public void testURL() {
+        System.out.println("URL");
         defaultdb instance = new defaultdb();
-        String expResult = "";
+        String expResult = "BleepBloop.org";
+        instance.setURL("BleepBloop.org");
         String result = instance.getURL();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        instance.setURL("YadaYada.com");
+        result = instance.getURL();
+        assertNotEquals(expResult,result);
     }
 
     /**
-     * Test of getSqlStatementTimeoutSeconds method, of class defaultdb.
+     * Test of getSqlStatementTimeoutSeconds method and 
+     * setSqlStatementTimeoutSeconds method, of class defaultdb.
      */
     @Test
-    public void testGetSqlStatementTimeoutSeconds() {
+    public void testSqlStatementTimeoutSeconds() {
         System.out.println("getSqlStatementTimeoutSeconds");
         defaultdb instance = new defaultdb();
         int expResult = 0;
+        instance.setSqlStatementTimeoutSeconds(0);
         int result = instance.getSqlStatementTimeoutSeconds();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setSqlStatementTimeoutSeconds method, of class defaultdb.
-     */
-    @Test
-    public void testSetSqlStatementTimeoutSeconds() {
-        System.out.println("setSqlStatementTimeoutSeconds");
-        int value = 0;
-        defaultdb instance = new defaultdb();
-        instance.setSqlStatementTimeoutSeconds(value);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setURL method, of class defaultdb.
-     */
-    @Test
-    public void testSetURL() {
-        System.out.println("setURL");
-        String url = "";
-        defaultdb instance = new defaultdb();
-        instance.setURL(url);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        instance.setSqlStatementTimeoutSeconds(10);
+        result = instance.getSqlStatementTimeoutSeconds();
+        assertNotEquals(expResult,result);
     }
 
     /**
@@ -99,11 +80,10 @@ public class defaultdbTest {
     public void testGetConnection() throws Exception {
         System.out.println("getConnection");
         defaultdb instance = new defaultdb();
+        instance.setURL("jdbc:sqlite:Bands.db");
         Connection expResult = null;
         Connection result = instance.getConnection();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertNotEquals(expResult, result);
     }
 
     /**
@@ -113,9 +93,11 @@ public class defaultdbTest {
     public void testClose() throws Exception {
         System.out.println("close");
         defaultdb instance = new defaultdb();
+        instance.setURL("jdbc:sqlite:Bands.db");
+        Connection result = instance.getConnection();
         instance.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Connection result2 = instance.getConnection();
+        assertNotEquals(result2,result);   
     }
     
 }
