@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Jonahs Sick Clicker</string>
+    <string name="button">CLICK ME!</string>
+    <string name="clicks">\Clicks:\</string>
+    <string name="Header">Welcome to the Ultimate Clicker</string>
+    <string name="Upgrade1">Upgrade Clicks</string>
+    <string name="Upgrade2">Upgrade Auto Clicks</string>
+    <string name="Upgrade1Cost">100</string>
+    <string name="Upgrade2Cost">100</string>
+</resources>
