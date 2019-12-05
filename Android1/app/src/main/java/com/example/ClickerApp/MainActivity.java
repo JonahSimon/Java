@@ -1,7 +1,6 @@
 package com.example.ClickerApp;
 
 import android.annotation.SuppressLint;
-import android.app.Notification;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -108,6 +107,12 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else
                     b_Up1.setEnabled(false);
+
+                if(clicks == Up2Cost || clicks > Up2Cost){
+                    b_Up2.setEnabled(true);
+                }
+                else
+                    b_Up2.setEnabled(false);
             }
         });
 
@@ -119,11 +124,18 @@ public class MainActivity extends AppCompatActivity {
                 AutoClicks++;
                 Up2Cost = Up2Cost * 2;
                 tv_Up2.setText("Cost: " + Up2Cost);
+
                 if(clicks == Up2Cost || clicks > Up2Cost){
                     b_Up2.setEnabled(true);
                 }
                 else
                     b_Up2.setEnabled(false);
+
+                if(clicks == Up1Cost || clicks > Up1Cost){
+                    b_Up1.setEnabled(true);
+                }
+                else
+                    b_Up1.setEnabled(false);
             }
         });
 
